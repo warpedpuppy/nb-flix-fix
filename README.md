@@ -38,7 +38,7 @@
 
 ## Technical Aspects
 
-● The application will be a single-page application (SPA)
+● The application will be a single-page application (SPA)<br>
 ● The application will use state routing to navigate between views and share URLs
 ● The application will give users the option to filter movies
 ● The application will give users the option to sort movies
