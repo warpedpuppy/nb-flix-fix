@@ -3,3 +3,41 @@ $color: steelblue;
 .my-flix {
   color: $color;
 }
+body {
+  background-color: lightblue;
+}
+.main-view {
+  text-align: center;
+}
+.movie-card {
+  border: 1px solid #0000ff;
+  padding: 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+.movie-view {
+  text-align: center;
+}
+.movie-poster {
+}
+.movie-title {
+  font-size: larger;
+}
+.movie-description {
+}
+.movie-genre {
+}
+.movie-director {
+}
+.movie-release {
+}
+.label {
+  font-size: large;
+}
+.value {
+}
+button {
+  color: #0000ff;
+  background-color: lightgray;
+  cursor: pointer;
+}
