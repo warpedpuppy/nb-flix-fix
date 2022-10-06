@@ -1,4 +1,37 @@
 .my-flix {
   color: steelblue;
 }
+
+body {
+  background-color: lightblue;
+}
+
+.main-view {
+  text-align: center;
+}
+
+.movie-card {
+  border: 1px solid #0000ff;
+  padding: 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.movie-view {
+  text-align: center;
+}
+
+.movie-title {
+  font-size: larger;
+}
+
+.label {
+  font-size: large;
+}
+
+button {
+  color: #0000ff;
+  background-color: lightgray;
+  cursor: pointer;
+}
 /*# sourceMappingURL=index.caa67093.css.map */
