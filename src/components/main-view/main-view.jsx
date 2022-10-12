@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import propTypes from "prop-types";
 
-import { render } from "react-dom/cjs/react-dom.production.min";
+//import { render } from "react-dom/cjs/react-dom.production.min";
 
 import { LoginView } from "../login-view/login-view";
 import { MovieView } from "../movie-view/movie-view";
