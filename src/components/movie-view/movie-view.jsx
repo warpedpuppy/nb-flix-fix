@@ -1,6 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
+
+import "./movie-view.scss";
 
 export class MovieView extends React.Component {
+  keypressCallback(event) {
+    console.log(event.key);
+  }
+
+  componentDidMount() {
+    document.addEventListener("keypress", this.keypressCallback);
+  }
+
   render() {
     const { movie, onBackClick } = this.props;
 
@@ -25,9 +36,9 @@ export class MovieView extends React.Component {
           <span className="label">Director: </span>
           <span className="value">{movie.Director.name}</span>
         </div>
-        <div className="movie-release">
-          <span className="label">Release Year: </span>
-          <span className="value">{movie.releaseYear}</span>
+        <div className="movie-featured">
+          <span className="label">Featured: </span>
+          <span className="value">{movie.featured}</span>
         </div>
         <button
           onClick={() => {
