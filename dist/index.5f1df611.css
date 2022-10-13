@@ -1,0 +1,40 @@
+.movie-view {
+  text-align: center;
+}
+
+.movie-title {
+  font-size: larger;
+}
+
+.label {
+  font-size: large;
+}
+
+button {
+  color: #00f;
+  cursor: pointer;
+  background-color: #d3d3d3;
+}
+
+.main-view {
+  text-align: center;
+}
+
+.movie-card {
+  cursor: pointer;
+  border: 1px solid #00f;
+  margin: 5px;
+  padding: 15px;
+}
+
+
+
+.my-flix {
+  color: #4682b4;
+}
+
+body {
+  background-color: #add8e6;
+}
+
+/*# sourceMappingURL=index.5f1df611.css.map */
