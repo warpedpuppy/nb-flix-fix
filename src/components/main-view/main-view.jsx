@@ -6,7 +6,7 @@ import propTypes from "prop-types";
 
 import { LoginView } from "../login-view/login-view";
 import { MovieView } from "../movie-view/movie-view";
-import { MovieCard } from "./movie-card/movie-card";
+import { MovieCard } from "../movie-card/movie-card";
 
 import "./main-view.scss";
 
@@ -45,7 +45,6 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, selectedMovie, user } = this.state;
-
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
