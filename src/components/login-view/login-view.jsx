@@ -23,47 +23,41 @@ export function LoginView(props) {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <Card.Group>
-            <Card>
-              <Card.Body>
-                <Card.Title>Login</Card.Title>
-                <Form>
-                  <Form.Group controlId="formUsername">
-                    <Form.Label>Username: </Form.Label>
-                    <Form.Control
-                      type="text"
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                      placeholder="username"
-                    />
-                  </Form.Group>
+    <Row>
+      <Col>
+        <Card.Group>
+          <Card>
+            <Card.Body>
+              <Card.Title>Login</Card.Title>
+              <Form>
+                <Form.Group controlId="formUsername">
+                  <Form.Label>Username: </Form.Label>
+                  <Form.Control
+                    type="text"
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    placeholder="username"
+                  />
+                </Form.Group>
 
-                  <Form.Group controlId="formPassword">
-                    <Form.Label>Password: </Form.Label>
-                    <Form.Control
-                      type="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      placeholder="password"
-                    />
-                  </Form.Group>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password: </Form.Label>
+                  <Form.Control
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="password"
+                  />
+                </Form.Group>
 
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Card.Group>
-        </Col>
-      </Row>
-    </Container>
+                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Card.Group>
+      </Col>
+    </Row>
   );
 }
