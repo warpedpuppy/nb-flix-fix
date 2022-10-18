@@ -27905,12 +27905,12 @@ class MainView extends (0, _reactDefault.default).Component {
                             onMovieClick: (newSelectedMovie)=>{
                                 this.setSelectedMovie(newSelectedMovie);
                             }
-                        }, movie._id, false, {
+                        }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
                             lineNumber: 70,
                             columnNumber: 17
                         }, this)
-                    }, void 0, false, {
+                    }, movie._id, false, {
                         fileName: "src/components/main-view/main-view.jsx",
                         lineNumber: 69,
                         columnNumber: 15
@@ -41867,8 +41867,15 @@ MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         Title: (0, _propTypesDefault.default).string.isRequired,
         Description: (0, _propTypesDefault.default).string.isRequired,
-        Director: (0, _propTypesDefault.default).string.isRequired,
-        Genre: (0, _propTypesDefault.default).string.isRequired,
+        Director: (0, _propTypesDefault.default).shape({
+            Bio: (0, _propTypesDefault.default).string.isRequired,
+            Birth: (0, _propTypesDefault.default).string.isRequired,
+            Name: (0, _propTypesDefault.default).string.isRequired
+        }),
+        Genre: (0, _propTypesDefault.default).shape({
+            Description: (0, _propTypesDefault.default).string.isRequired,
+            Name: (0, _propTypesDefault.default).string.isRequired
+        }),
         ImagePath: (0, _propTypesDefault.default).string.isRequired
     }).isRequired,
     onMovieClick: (0, _propTypesDefault.default).func.isRequired
