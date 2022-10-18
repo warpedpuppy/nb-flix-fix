@@ -3,7 +3,7 @@ import axios from "axios";
 import propTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 
-//import { render } from "react-dom/cjs/react-dom.production.min";
+import { render } from "react-dom/cjs/react-dom.production.min";
 
 import { LoginView } from "../login-view/login-view";
 import { MovieView } from "../movie-view/movie-view";
@@ -44,13 +44,9 @@ export class MainView extends React.Component {
       user,
     });
   }
-  onRegistration(registered) {
-    this.setState({
-      registered,
-    });
-  }
+
   render() {
-    const { movies, selectedMovie, user, registered } = this.state;
+    const { movies, selectedMovie, user } = this.state;
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
