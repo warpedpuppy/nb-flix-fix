@@ -15,7 +15,7 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
-
+    console.log("movie view", movie);
     return (
       <div className="movie-view">
         <Row>
@@ -48,7 +48,7 @@ export class MovieView extends React.Component {
           <Col>
             <div className="movie-genre">
               <span className="label">Genre: </span>
-              <span className="value">{movie.Genre}</span>
+              <span className="value">{movie.Genre.Name}</span>
             </div>
           </Col>
         </Row>
@@ -57,7 +57,7 @@ export class MovieView extends React.Component {
           <Col>
             <div className="movie-director">
               <span className="label">Director: </span>
-              <span className="value">{movie.Director.name}</span>
+              <span className="value">{movie.Director.Name}</span>
             </div>
           </Col>
         </Row>
@@ -66,7 +66,7 @@ export class MovieView extends React.Component {
           <Col>
             <div className="movie-featured">
               <span className="label">Featured: </span>
-              <span className="value">{movie.featured}</span>
+              <span className="value">{movie.featured ? "true" : "false"}</span>
             </div>
           </Col>
         </Row>
