@@ -16,6 +16,12 @@ button {
   background-color: #d3d3d3;
 }
 
+.movie-featured {
+  display: hidden;
+}
+
+
+
 
 
 .main-view {
