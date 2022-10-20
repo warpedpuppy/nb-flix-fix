@@ -15,10 +15,30 @@ export function RegistrationView(props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.Registration(username);
+    const isReq = validate();
+    if (isReq) {
+      axios
+        // Is this the right api url? <-------------------------------------
+        .post("https://nixflix.herokuapp.com/users", {
+          username: username,
+          password: password,
+          email: email,
+          Birthday: birthday,
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          alert("Registration successful, please login");
+          window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
+        })
+        .catch((response) => {
+          console.error(response);
+          alert("Unable to register");
+        });
+    }
   };
 
   return (
@@ -84,5 +104,11 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.propTypes = {
-  onRegistration: PropTypes.func.isRequired,
+  register: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    // Birthday: PropTypes.string.isRequired,
+  }),
 };
