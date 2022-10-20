@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Form, Button, Card, Col, Row } from "react-bootstrap";
+import axios from "axios";
 
 export function LoginView(props) {
   const [username, setUsername] = useState("");
@@ -8,10 +9,24 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios
+      // This api url? <--------------------------------------
+      .post("https://nixflix.herokuapp.com/login", {
+        Username: username,
+        Password: password,
+      })
+      .then((response) => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch((e) => {
+        console.log("no such user");
+      });
+
     console.log(username, password);
     /* Send a request to the server for authentication */
     /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+    // props.onLoggedIn(username);
   };
   return (
     <Row>
