@@ -49,6 +49,9 @@ export class MovieView extends React.Component {
             <div className="movie-genre">
               <span className="label">Genre: </span>
               <span className="value">{movie.Genre.Name}</span>
+              <Link to={`/genres/${movie.Genre.Name}`}>
+                <Button variant="link">Genre</Button>
+              </Link>
             </div>
           </Col>
         </Row>
@@ -58,6 +61,9 @@ export class MovieView extends React.Component {
             <div className="movie-director">
               <span className="label">Director: </span>
               <span className="value">{movie.Director.Name}</span>
+              <Link to={`/directors/${movie.Director.Name}`}>
+                <Button variant="link">Director</Button>
+              </Link>
             </div>
           </Col>
         </Row>
@@ -70,13 +76,55 @@ export class MovieView extends React.Component {
             </div>
           </Col>
         </Row>
-        <Button
-          onClick={() => {
-            onBackClick(null);
-          }}
-        >
-          Back
-        </Button>
+        <Routes>
+          <Route
+            path="/movies/:movieId"
+            render={({ match, history }) => {
+              return (
+                <Col md={8}>
+                  <MovieView
+                    movie={movies.find((m) => m._id === match.params.movieId)}
+                    onBackClick={() => history.goBack()}
+                  />
+                </Col>
+              );
+            }}
+          />
+          <Route
+            path="/directors/:name"
+            render={({ match, history }) => {
+              if (movies.length === 0) return <div className="main-view" />;
+              return (
+                <Col md={8}>
+                  <DirectorView
+                    director={
+                      movies.find((m) => m.Director.Name === match.params.name)
+                        .Director
+                    }
+                    onBackClick={() => history.goBack()}
+                  />
+                </Col>
+              );
+            }}
+          />
+          <Route
+            path="/genre/:name"
+            render={({ match, history }) => {
+              if (movies.length === 0) return <div className="main-view" />;
+              return (
+                <Col md={8}>
+                  <GenreView
+                    genre={
+                      movies.find((m) => m.Genre.Name === match.params.name)
+                        .Genre
+                    }
+                    onBackClick={() => history.goBack()}
+                  />
+                </Col>
+              );
+            }}
+          />
+        </Routes>
       </div>
     );
   }
