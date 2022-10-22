@@ -16,12 +16,11 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
       axios
-        // Is this the right api url? <-------------------------------------
         .post("https://nixflix.herokuapp.com/users", {
           username: username,
           password: password,
@@ -91,7 +90,11 @@ export function RegistrationView(props) {
                   />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  onClick={handleRegister}
+                >
                   Submit
                 </Button>
               </Form>
