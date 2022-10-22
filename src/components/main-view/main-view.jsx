@@ -40,8 +40,9 @@ export class MainView extends React.Component {
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
+      let user = localStorage.getItem("user");
       this.setState({
-        user: localStorage.getItem("user"),
+        user: JSON.parse(user),
       });
       this.getMovies(accessToken);
     }
@@ -54,12 +55,11 @@ export class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log("authData from onLoggedIn function", authData);
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", JSON.stringify(authData.user));
     this.setState({
       user: authData.user.Username,
     });
-    localStorage.setItem("token", authData.token);
-    localStorage.setItem("user", authData.user.Username);
-
     this.getMovies(authData.token);
   }
 
@@ -110,21 +110,30 @@ export class MainView extends React.Component {
                 exact
                 path="/"
                 render={() => {
-                  if (!user)
+                  if (!user) {
                     return (
-                      <Col>
-                        <LoginView
-                          movies={movies}
-                          onLoggedIn={(user) => this.onLoggedIn(user)}
-                        />
-                      </Col>
+                      <Container>
+                        <Row>
+                          <Col className="m-4">
+                            <LoginView
+                              onLoggedIn={(user) => this.onLoggedIn(user)}
+                            />
+                          </Col>
+                        </Row>
+                      </Container>
                     );
-                  if (movies.length === 0) return <div className="main-view" />;
-                  return movies.map((m) => (
-                    <Col md={3} key={m._id}>
-                      <MovieCard movie={m} />
-                    </Col>
-                  ));
+                  }
+                  if (movies.length === 0) {
+                    return (
+                      <Container>
+                        <Row>
+                          <Col className="d-flex justify-content-center">
+                            The list is empty!
+                          </Col>
+                        </Row>
+                      </Container>
+                    );
+                  }
                 }}
               />
               <Route
