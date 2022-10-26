@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Button, Container } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
+import { Link } from "react-router-dom";
 
 export function Menubar({ user }) {
   const onLoggedOut = () => {
@@ -28,19 +29,39 @@ export function Menubar({ user }) {
       variant="dark"
     >
       <Container>
-        <Navbar.Brand className="navbar-logo" href="/">
+        <Navbar.Brand className="navbar-logo" to="/" as={Link}>
           NixFlix
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="resposive-navbar-nav">
           <Nav className="ml-auto">
-            {isAuth()} <Nav.Link href="/">Movies</Nav.Link>
-            {isAuth()} <Nav.Link href="/directors">Directors</Nav.Link>
-            {isAuth()} <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
-            {isAuth()} <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
-            {!isAuth() && <Nav.Link href="/"> Sign-in</Nav.Link>}
-            <Nav.Link href="/register"> Sign-up</Nav.Link>
-            <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+            <Nav.Link to="/" as={Link}>
+              Home
+            </Nav.Link>
+
+            {user && (
+              <>
+                <Nav.Link to={`/users/${user.Username}`}>Profile</Nav.Link>
+
+                <Nav.Link to="/directors" as={Link}>
+                  Directors
+                </Nav.Link>
+
+                <Nav.Link onClick={onLoggedOut} as={Link}>
+                  Logout
+                </Nav.Link>
+              </>
+            )}
+            {!user && (
+              <>
+                <Nav.Link to="/" as={Link}>
+                  Sign-in
+                </Nav.Link>
+                <Nav.Link to="/register" as={Link}>
+                  Sign-up
+                </Nav.Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
