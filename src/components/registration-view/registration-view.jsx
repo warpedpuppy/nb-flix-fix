@@ -18,8 +18,8 @@ export function RegistrationView(props) {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    const isReq = validate();
-    if (isReq) {
+    // const isReq = validate();
+    // if (isReq) {
       axios
         .post("https://nixflix.herokuapp.com/users", {
           username: username,
@@ -37,7 +37,7 @@ export function RegistrationView(props) {
           console.error(response);
           alert("Unable to register");
         });
-    }
+    // }
   };
 
   return (
