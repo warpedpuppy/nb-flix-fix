@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import {
-  Container,
-  Form,
-  Button,
-  Card,
-  CardGroup,
-  Col,
-  Link,
-} from "react-bootstrap";
+import { Container, Form, Button, Card, Col, Link } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
@@ -109,6 +101,8 @@ export default function ProfileView(props) {
     }
   };
   console.log(favoriteMovies);
+  alert("ProfileView initialized");
+  return <h1>Profile view here</h1>;
 
   return (
     <Container className="profile-container">
@@ -117,132 +111,123 @@ export default function ProfileView(props) {
           Profile
         </Card.Header>
         <Card.Body>
-          <CardGroup>
-            <Card bg="dark" border="dark" text="light">
-              <span className="label text-center headline-profile-update">
-                Update profile information
-              </span>
-              <Form>
-                <Form.Group
-                  className="profile-form-group-username"
-                  controlId="formGroupUsername"
-                >
-                  <Form.Label>Username:</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Enter your username"
-                    required
-                  />
-                  {usernameErr && <p>{usernameErr}</p>}
-                </Form.Group>
-                <Form.Group
-                  className="profile-form-group-password"
-                  controlId="formGroupPassword"
-                >
-                  <Form.Label>Password:</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Your password must be 6 or more characters"
-                    minLength="6"
-                    required
-                  />
-                  {passwordErr && <p>{passwordErr}</p>}
-                </Form.Group>
-                <Form.Group
-                  className="profile-form-group-email"
-                  controlId="formGroupEmail"
-                >
-                  <Form.Label>Email:</Form.Label>
-                  <Form.Control
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                  />
-                  {emailErr && <p>{emailErr}</p>}
-                </Form.Group>
-                <Form.Group
-                  className="profile-form-group-birthday"
-                  controlId="formGroupBirthday"
-                >
-                  <Form.Label>Date of birth:</Form.Label>
-                  <Form.Control
-                    type="date"
-                    value={birthday}
-                    onChange={(e) => setBirthday(e.target.value)}
-                    placeholder="Enter your birthday"
-                  />
-                  {birthdayErr && <p>{birthdayErr}</p>}
-                </Form.Group>
-                <Button
-                  className="button-profile-view-update"
-                  variant="secondary"
-                  type="submit"
-                  onClick={handleUpdate}
-                >
-                  Update
-                </Button>
-              </Form>
-              <span className="label headline-profile-mini-cards">
-                My favorite movies
-              </span>
-            </Card>
-            <Card bg="dark" border="dark" text="light">
-              <span className="label text-center headline-profile-delete">
-                Delete account
-              </span>
-              <Col>
-                <Button
-                  className="button button-profile-view-delete"
-                  variant="danger"
-                  type="submit"
-                  onClick={handleDelete}
-                >
-                  DELETE ACCOUNT PERMANENTLY
-                </Button>
-              </Col>
-            </Card>
-          </CardGroup>
-          <CardGroup className="card-group-profile-mini-cards">
-            {favoriteMovies.map((m) => (
-              <Col
-                md={6}
-                lg={3}
-                key={m._id}
-                className="profile-movie-card-mini"
+          <Card bg="dark" border="dark" text="light">
+            <span className="label text-center headline-profile-update">
+              Update profile information
+            </span>
+            <Form>
+              <Form.Group
+                className="profile-form-group-username"
+                controlId="formGroupUsername"
               >
-                <Card className="h-100" bg="dark" text="light">
-                  <Link
-                    to={`/movies/${m._id}`}
-                    className="profile-movie-card-link"
-                  >
-                    <Card.Img
-                      variant="top"
-                      crossOrigin="anonymous | use-credentials"
-                      src={m.ImagePath}
-                    />
-                    <Card.Body>
-                      <Card.Title>{m.Title}</Card.Title>
-                    </Card.Body>
-                  </Link>
-                  <Button
-                    className="button-profile-view-remove-favorite"
-                    variant="outline-danger"
-                    size="sm"
-                    type="button"
-                    onClick={() => removeFavorite(m._id)}
-                  >
-                    Remove
-                  </Button>
-                </Card>
-              </Col>
-            ))}
-          </CardGroup>
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter your username"
+                  required
+                />
+                {usernameErr && <p>{usernameErr}</p>}
+              </Form.Group>
+              <Form.Group
+                className="profile-form-group-password"
+                controlId="formGroupPassword"
+              >
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Your password must be 6 or more characters"
+                  minLength="6"
+                  required
+                />
+                {passwordErr && <p>{passwordErr}</p>}
+              </Form.Group>
+              <Form.Group
+                className="profile-form-group-email"
+                controlId="formGroupEmail"
+              >
+                <Form.Label>Email:</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                />
+                {emailErr && <p>{emailErr}</p>}
+              </Form.Group>
+              <Form.Group
+                className="profile-form-group-birthday"
+                controlId="formGroupBirthday"
+              >
+                <Form.Label>Date of birth:</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={birthday}
+                  onChange={(e) => setBirthday(e.target.value)}
+                  placeholder="Enter your birthday"
+                />
+                {birthdayErr && <p>{birthdayErr}</p>}
+              </Form.Group>
+              <Button
+                className="button-profile-view-update"
+                variant="secondary"
+                type="submit"
+                onClick={handleUpdate}
+              >
+                Update
+              </Button>
+            </Form>
+            <span className="label headline-profile-mini-cards">
+              My favorite movies
+            </span>
+          </Card>
+          <Card bg="dark" border="dark" text="light">
+            <span className="label text-center headline-profile-delete">
+              Delete account
+            </span>
+            <Col>
+              <Button
+                className="button button-profile-view-delete"
+                variant="danger"
+                type="submit"
+                onClick={handleDelete}
+              >
+                DELETE ACCOUNT PERMANENTLY
+              </Button>
+            </Col>
+          </Card>
+          {favoriteMovies.map((m) => (
+            <Col md={6} lg={3} key={m._id} className="profile-movie-card-mini">
+              <Card className="h-100" bg="dark" text="light">
+                <Link
+                  to={`/movies/${m._id}`}
+                  className="profile-movie-card-link"
+                >
+                  <Card.Img
+                    variant="top"
+                    crossOrigin="anonymous | use-credentials"
+                    src={m.ImagePath}
+                  />
+                  <Card.Body>
+                    <Card.Title>{m.Title}</Card.Title>
+                  </Card.Body>
+                </Link>
+                <Button
+                  className="button-profile-view-remove-favorite"
+                  variant="outline-danger"
+                  size="sm"
+                  type="button"
+                  onClick={() => removeFavorite(m._id)}
+                >
+                  Remove
+                </Button>
+              </Card>
+            </Col>
+          ))}
         </Card.Body>
         <Card.Footer className="text-right">
           <Button
