@@ -6,7 +6,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
+  Navigate,
   Routes,
   Link,
 } from "react-router-dom";
@@ -99,7 +99,7 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, user } = this.state;
-
+    console.log("User: ", user);
     return (
       <Router>
         <Menubar user={user} />
@@ -107,63 +107,52 @@ export class MainView extends React.Component {
           <Row className="main-view d-flex justify-content-center pb-5 px-3 pt-3">
             <Routes>
               <Route
-                exact
                 path="/"
-                render={() => {
-                  if (!user) {
-                    return (
-                      <Container>
-                        <Row>
-                          <Col className="m-4">
-                            <LoginView
-                              onLoggedIn={(user) => this.onLoggedIn(user)}
-                            />
-                          </Col>
-                        </Row>
-                      </Container>
-                    );
-                  }
-                  if (movies.length === 0) {
-                    return (
-                      <Container>
-                        <Row>
-                          <Col className="d-flex justify-content-center">
-                            The list is empty!
-                          </Col>
-                        </Row>
-                      </Container>
-                    );
-                  }
-                }}
+                element={
+                  !user ? (
+                    <Container>
+                      <Row>
+                        <Col className="m-4">
+                          <LoginView
+                            onLoggedIn={(user) => this.onLoggedIn(user)}
+                          />
+                        </Col>
+                      </Row>
+                    </Container>
+                  ) : !movies.length ? (
+                    <div>No moveies</div>
+                  ) : (
+                    <div>Place movies here</div>
+                  )
+                }
               />
               <Route
                 path="/register"
-                render={() => {
-                  if (user) return <Redirect to="/" />;
-                  return (
+                element={
+                  user ? (
+                    <Navigate to="/" replace />
+                  ) : (
                     <Col lg={8} md={8}>
                       <RegistrationView />
                     </Col>
-                  );
-                }}
+                  )
+                }
               />
 
-              <Route
-                exact
-                path={`/users/${user}`}
-                render={({ match, history }) => {
-                  if (!user) return <Redirect to="/" />;
-                  return (
-                    <Col>
-                      <ProfileView
-                        movies={movies}
-                        user={user}
-                        onBackClick={() => history.goBack()}
-                      />
-                    </Col>
-                  );
-                }}
-              />
+              {user.Username && (
+                <Route
+                  path={`/users/${user.Username}`}
+                  element={
+                    !user ? (
+                      <Navigate to="/" replace />
+                    ) : (
+                      <Col>
+                        <ProfileView movies={movies} user={user} />
+                      </Col>
+                    )
+                  }
+                />
+              )}
               <Route
                 exact
                 path="/movies/:id"
