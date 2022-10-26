@@ -6,7 +6,7 @@ import { Container, Form, Button, Card, Col, Link } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import "./profile-view.scss";
-export default function ProfileView(props) {
+export function ProfileView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function ProfileView(props) {
   const [passwordErr, setPasswordErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [birthdayErr, setBirthdayErr] = useState("");
-  const { user, favoriteMovies, removeFavorite, onBackClick } = props;
+  const { user, movies, removeFavorite, onBackClick } = props;
 
   // Validate user inputs
   const validate = () => {
@@ -100,9 +100,6 @@ export default function ProfileView(props) {
         .catch((e) => console.log(e));
     }
   };
-  console.log(favoriteMovies);
-  alert("ProfileView initialized");
-  return <h1>Profile view here</h1>;
 
   return (
     <Container className="profile-container">
@@ -200,7 +197,7 @@ export default function ProfileView(props) {
               </Button>
             </Col>
           </Card>
-          {favoriteMovies.map((m) => (
+          {movies.filter( item => user.FavoriteMovies.includes(item._id) ).map((m) => (
             <Col md={6} lg={3} key={m._id} className="profile-movie-card-mini">
               <Card className="h-100" bg="dark" text="light">
                 <Link

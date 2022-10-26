@@ -19,7 +19,6 @@ export function Menubar({ user }) {
       return false;
     }
   };
-
   return (
     <Navbar
       className="main-nav"
@@ -41,7 +40,7 @@ export function Menubar({ user }) {
 
             {user && (
               <>
-                <Nav.Link to={`/users/${user.Username}`}>Profile</Nav.Link>
+                <Nav.Link to={`/users/${user.Username}`} as={Link}>Profile</Nav.Link>
 
                 <Nav.Link to="/directors" as={Link}>
                   Directors

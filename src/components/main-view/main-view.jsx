@@ -58,7 +58,7 @@ export class MainView extends React.Component {
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", JSON.stringify(authData.user));
     this.setState({
-      user: authData.user.Username,
+      user: authData.user,
     });
     this.getMovies(authData.token);
   }
@@ -139,20 +139,23 @@ export class MainView extends React.Component {
                 }
               />
 
-              {user.Username && (
+    
                 <Route
-                  path={`/users/${user.Username}`}
+                  path={`/users/:name`}
                   element={
-                    !user ? (
-                      <Navigate to="/" replace />
-                    ) : (
-                      <Col>
-                        <ProfileView movies={movies} user={user} />
-                      </Col>
-                    )
-                  }
+				  
+					!user ? (
+						<Navigate to="/" replace />
+					  ) : (
+						<Col lg={8} md={8}>
+						  <ProfileView movies={movies} user={user} />
+						</Col>
+					  )
+					}
+					
+					
                 />
-              )}
+
               <Route
                 exact
                 path="/movies/:id"
