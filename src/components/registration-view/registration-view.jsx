@@ -18,26 +18,26 @@ export function RegistrationView(props) {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    const isReq = validate();
-    if (isReq) {
-      axios
-        .post("https://nixflix.herokuapp.com/users", {
-          username: username,
-          password: password,
-          email: email,
-          Birthday: birthday,
-        })
-        .then((response) => {
-          const data = response.data;
-          console.log(data);
-          alert("Registration successful, please login");
-          window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
-        })
-        .catch((response) => {
-          console.error(response);
-          alert("Unable to register");
-        });
-    }
+    // const isReq = validate();
+    // if (isReq) {
+    axios
+      .post("https://nixflix.herokuapp.com/users", {
+        username: username,
+        password: password,
+        email: email,
+        Birthday: birthday,
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        alert("Registration successful, please login");
+        window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
+      })
+      .catch((response) => {
+        console.error(response);
+        alert("Unable to register");
+      });
+    // }
   };
 
   return (
