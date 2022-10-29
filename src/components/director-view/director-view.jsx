@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Container, Col, Row } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
-
+import { PropTypes } from "react-bootstrap/esm/Image";
 export class DirectorView extends React.Component {
   render() {
     const { director, onBackClick, directorMovies } = this.props;
-
+    console.log(directors);
     return (
       <Container className="director-view">
         <Row>

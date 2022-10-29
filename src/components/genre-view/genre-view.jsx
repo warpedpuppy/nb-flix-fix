@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Container, Col, Row } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
+import PropTypes from "prop-types";
 
 export class GenreView extends React.Component {
   render() {
