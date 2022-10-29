@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Nav, Button, Container } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export function Menubar({ user }) {
   const onLoggedOut = () => {
@@ -19,7 +20,6 @@ export function Menubar({ user }) {
       return false;
     }
   };
-
   return (
     <Navbar
       className="main-nav"
@@ -41,10 +41,16 @@ export function Menubar({ user }) {
 
             {user && (
               <>
-                <Nav.Link to={`/users/${user.Username}`}>Profile</Nav.Link>
+                <Nav.Link to={`/users/${user.Username}`} as={Link}>
+                  Profile
+                </Nav.Link>
 
                 <Nav.Link to="/directors" as={Link}>
                   Directors
+                </Nav.Link>
+
+                <Nav.Link to="/genres" as={Link}>
+                  Genres
                 </Nav.Link>
 
                 <Nav.Link onClick={onLoggedOut} as={Link}>
