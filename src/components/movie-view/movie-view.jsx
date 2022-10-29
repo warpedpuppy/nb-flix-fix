@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Button, Col, Row } from "react-bootstrap";
 
 import "./movie-view.scss";
+import { MovieCard } from "../movie-card/movie-card";
 
 export class MovieView extends React.Component {
   keypressCallback(event) {
@@ -15,6 +16,7 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
+    console.log("Movie: ", movie);
     return (
       <div className="movie-view">
         <Row>
@@ -75,56 +77,26 @@ export class MovieView extends React.Component {
             </div>
           </Col>
         </Row>
-        <Routes>
-          <Route
-            path="/movies/:movieId"
-            render={({ match, history }) => {
-              return (
-                <Col md={8}>
-                  <MovieView
-                    movie={movies.find((m) => m._id === match.params.movieId)}
-                    onBackClick={() => history.goBack()}
-                  />
-                </Col>
-              );
-            }}
-          />
-          <Route
-            path="/directors/:name"
-            render={({ match, history }) => {
-              if (movies.length === 0) return <div className="main-view" />;
-              return (
-                <Col md={8}>
-                  <DirectorView
-                    director={
-                      movies.find((m) => m.Director.Name === match.params.name)
-                        .Director
-                    }
-                    onBackClick={() => history.goBack()}
-                  />
-                </Col>
-              );
-            }}
-          />
-          <Route
-            path="/genre/:name"
-            render={({ match, history }) => {
-              if (movies.length === 0) return <div className="main-view" />;
-              return (
-                <Col md={8}>
-                  <GenreView
-                    genre={
-                      movies.find((m) => m.Genre.Name === match.params.name)
-                        .Genre
-                    }
-                    onBackClick={() => history.goBack()}
-                  />
-                </Col>
-              );
-            }}
-          />
-        </Routes>
       </div>
     );
   }
 }
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string,
+    Description: PropTypes.string,
+    ImagePath: PropTypes.string,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string,
+      Description: PropTypes.string,
+    }),
+    Actors: PropTypes.array,
+    Director: PropTypes.shape({
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      Birth: PropTypes.string,
+      Death: PropTypes.string,
+    }),
+  }),
+  onBackClick: PropTypes.func,
+};
