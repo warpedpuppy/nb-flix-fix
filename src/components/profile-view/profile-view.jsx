@@ -6,7 +6,7 @@ import { Container, Form, Button, Card, Col, Link } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import "./profile-view.scss";
-export default function ProfileView(props) {
+export function ProfileView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function ProfileView(props) {
   const [passwordErr, setPasswordErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [birthdayErr, setBirthdayErr] = useState("");
-  const { user, favoriteMovies, removeFavorite, onBackClick } = props;
+  const { user, movies, removeFavorite, onBackClick } = props;
 
   // Validate user inputs
   const validate = () => {
@@ -50,8 +50,6 @@ export default function ProfileView(props) {
     e.preventDefault();
     const isReq = validate();
     const token = localStorage.getItem("token");
-    console.log(isReq);
-    console.log(token);
     console.log(user);
     if (isReq && token !== null && user !== null) {
       axios
@@ -100,9 +98,6 @@ export default function ProfileView(props) {
         .catch((e) => console.log(e));
     }
   };
-  console.log(favoriteMovies);
-  alert("ProfileView initialized");
-  return <h1>Profile view here</h1>;
 
   return (
     <Container className="profile-container">
@@ -110,6 +105,8 @@ export default function ProfileView(props) {
         <Card.Header className="text-center" as="h5">
           Profile
         </Card.Header>
+        <Card.Body>Logged in as: {user.Username} </Card.Body>
+        <Card.Body>Email: {user.Email} </Card.Body>
         <Card.Body>
           <Card bg="dark" border="dark" text="light">
             <span className="label text-center headline-profile-update">
@@ -196,38 +193,45 @@ export default function ProfileView(props) {
                 type="submit"
                 onClick={handleDelete}
               >
-                DELETE ACCOUNT PERMANENTLY
+                DELETE ACCOUNT
               </Button>
             </Col>
           </Card>
-          {favoriteMovies.map((m) => (
-            <Col md={6} lg={3} key={m._id} className="profile-movie-card-mini">
-              <Card className="h-100" bg="dark" text="light">
-                <Link
-                  to={`/movies/${m._id}`}
-                  className="profile-movie-card-link"
-                >
-                  <Card.Img
-                    variant="top"
-                    crossOrigin="anonymous | use-credentials"
-                    src={m.ImagePath}
-                  />
-                  <Card.Body>
-                    <Card.Title>{m.Title}</Card.Title>
-                  </Card.Body>
-                </Link>
-                <Button
-                  className="button-profile-view-remove-favorite"
-                  variant="outline-danger"
-                  size="sm"
-                  type="button"
-                  onClick={() => removeFavorite(m._id)}
-                >
-                  Remove
-                </Button>
-              </Card>
-            </Col>
-          ))}
+          {movies
+            .filter((item) => user.FavoriteMovies.includes(item._id))
+            .map((m) => (
+              <Col
+                md={6}
+                lg={3}
+                key={m._id}
+                className="profile-movie-card-mini"
+              >
+                <Card className="h-100" bg="dark" text="light">
+                  <Link
+                    to={`/movies/${m._id}`}
+                    className="profile-movie-card-link"
+                  >
+                    <Card.Img
+                      variant="top"
+                      crossOrigin="anonymous | use-credentials"
+                      src={m.ImagePath}
+                    />
+                    <Card.Body>
+                      <Card.Title>{m.Title}</Card.Title>
+                    </Card.Body>
+                  </Link>
+                  <Button
+                    className="button-profile-view-remove-favorite"
+                    variant="outline-danger"
+                    size="sm"
+                    type="button"
+                    onClick={() => removeFavorite(m._id)}
+                  >
+                    Remove
+                  </Button>
+                </Card>
+              </Col>
+            ))}
         </Card.Body>
         <Card.Footer className="text-right">
           <Button
@@ -246,5 +250,5 @@ export default function ProfileView(props) {
 }
 
 ProfileView.propTypes = {
-  favoriteMovies: PropTypes.array.isRequired,
+  favoriteMovies: PropTypes.array,
 };
