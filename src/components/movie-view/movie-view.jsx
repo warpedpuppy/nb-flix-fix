@@ -1,29 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Button, Col, Row } from "react-bootstrap";
 
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import "./movie-view.scss";
 import { MovieCard } from "../movie-card/movie-card";
 
 export function MovieView(props) {
-  // state = { movie: {} };
-  // keypressCallback(event) {
-  //   console.log(event.key);
-  // }
-  let [movie, setMovie] = useState({});
-  //componentDidMount() {
-  document.addEventListener("keypress", this.keypressCallback);
-  const { id } = useParams();
-  console.log(id);
-  let film = props.movies.find((m) => m._id === id);
-  //setMovie(film);
-  //}
 
-  // render() {
-  console.log("Movie: ", movie);
-  return <h1>Hello</h1>;
+	const { movieId } = useParams();
+	let navigate = useNavigate();
+	
+	let [ movie, setMovie ] = useState({});
+
+	useEffect( () => {
+			// document.addEventListener("keypress", this.keypressCallback);
+			let film = props.movies.find( function(m){ return m._id == movieId });
+			setMovie(film);
+	}, [])
 
   return (
     <div className="movie-view">
@@ -57,8 +52,8 @@ export function MovieView(props) {
         <Col>
           <div className="movie-genre">
             <span className="label">Genre: </span>
-            <span className="value">{movie.Genre.Name}</span>
-            <Link to={`/genres/${movie.Genre.Name}`}>
+            <span className="value">{movie.Genre?.Name}</span>
+            <Link to={`/genres/${movie.Genre?.Name}`}>
               <Button variant="link">Genre</Button>
             </Link>
           </div>
@@ -69,8 +64,8 @@ export function MovieView(props) {
         <Col>
           <div className="movie-director">
             <span className="label">Director: </span>
-            <span className="value">{movie.Director.Name}</span>
-            <Link to={`/directors/${movie.Director.Name}`}>
+            <span className="value">{movie.Director?.Name}</span>
+            <Link to={`/directors/${movie.Director?.Name}`}>
               <Button variant="link">Director</Button>
             </Link>
           </div>
@@ -85,6 +80,7 @@ export function MovieView(props) {
           </div>
         </Col>
       </Row>
+	  <button onClick={() => navigate('/', { replace: true })}>go back</button>
     </div>
   );
 }
